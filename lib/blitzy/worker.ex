@@ -4,10 +4,8 @@ defmodule Blitzy.Worker do
 
   def start(url) do
     IO.puts "Running on #node-#{node()}"
-    # {timestamp, response} = Duration.measure(fn -> HTTPoison.get(url) end)
-    :timer.sleep(200)
-    # handle_response({Duration.to_milliseconds(timestamp), response})
-    handle_response({200, {:ok, :thing}})
+    {timestamp, response} = Duration.measure(fn -> HTTPoison.get(url) end)
+    handle_response({Duration.to_milliseconds(timestamp), response})
   end
 
   defp handle_response({msecs, {:ok, :thing}}) do
